@@ -1,15 +1,18 @@
-extern	printf
 section .data
-msg:	db "Hello world", 0
-fmt:    db "%s", 10, 0
+msg: db "Hello World", 0xa
+len: equ $-msg
+
 section .text
 global _start
+
 _start:
-push    rbp
-mov	rdi,fmt
-mov	rsi,msg
-mov	rax,0
-call    printf
-pop	rbp
-mov	rax,0
-ret
+
+mov rax, 1
+mov rbx, 1
+mov rdi, len
+mov rsi, msg
+syscall
+
+mov rbx, 0
+mov rax, 60
+syscall
